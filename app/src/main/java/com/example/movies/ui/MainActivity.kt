@@ -5,7 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -15,6 +19,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.movies.R
 import com.example.movies.ui.navigation.MovieBottomBar
@@ -37,7 +42,7 @@ class MainActivity : ComponentActivity() {
         MoviesTheme {
             val navController = rememberNavController()
             Scaffold(
-                topBar = { MovieTopAppBar() },
+                topBar = { MovieTopAppBar(navController) },
                 bottomBar = { MovieBottomBar(navController) },
                 content = { paddingValues ->
                     Surface(
@@ -56,12 +61,19 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieTopAppBar() {
+fun MovieTopAppBar(navController: NavHostController) {
     TopAppBar(
         title = { Text(stringResource(id = R.string.app_name)) },
         colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
-        )
+        ),
+        navigationIcon = {
+            IconButton(onClick = { navController.navigateUp() }) {
+                Icon(
+                    imageVector = Icons.Filled.ArrowBack,
+                    contentDescription = "Back"
+                )
+            }
+        },
     )
 }
-
