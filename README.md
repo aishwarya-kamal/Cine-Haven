@@ -41,6 +41,7 @@ You are always welcome to contribute to the project by creating a pull request o
 
 ## Upcoming Features
 - [ ] Add more information in the Movie Details screen
-- [ ] Offline capabilities
+- [ ] Caching
 - [ ] UI Improvements
 - [ ] Tests
+- [ ] Pagination
